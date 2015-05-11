@@ -1,0 +1,31 @@
+<HTML>
+
+
+
+<script type="text/javascript">
+var guess, message;
+var birthdate = new Date(1985, 05, 28, 5, 22);
+var birthMs = birthdate.getTime();
+console.log(birthMs);
+var today = new Date();
+var todayMs = today.getTime();
+console.log(todayMs);
+var aliveMs = todayMs - birthMs;
+var aliveSeconds = Math.floor(aliveMs/1000/60);
+console.log(aliveSeconds);
+
+
+guess = prompt("I was born May 28, 1985 at 5:22 am. How many hours do you think I have been alive?");
+
+if (guess == aliveSeconds) {
+  message = "That is correct! Are you sure you didn't cheat?";
+
+} else {
+  message = "Sorry, try again."
+}
+
+alert(message);
+
+
+
+</script>
