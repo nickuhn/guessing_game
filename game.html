@@ -63,6 +63,21 @@ if (guess == aliveHours) {
 }
 
 alert(message);
+
+//Days alive loop
+guess = prompt("How many days do you think I have been alive?");
+
+if (guess == aliveDays) {
+  message = "That is correct! Are you sure you didn't cheat?";
+  correct += 1;
+} else if (guess < aliveDays) {
+  message = "Good guess but it is much longer than that.";
+} else {
+  message = "Good guess but not quite that long yet!";
+}
+
+alert(message);
+
 alert("Congrats you got "+ correct + " answers correct")
 
 </script>
