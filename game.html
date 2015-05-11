@@ -1,8 +1,8 @@
 
 <script type="text/javascript">
 
-var guess, message;
-var correct = 0;
+var guess, message, userGuess;
+var timesGuessed = 0;
 //Set birthday and convert to milliseconds
 var birthdate = new Date(1985, 05, 28, 5, 22);
 var birthMs = birthdate.getTime();
@@ -19,65 +19,47 @@ var aliveSeconds = Math.floor(aliveMs/1000/60);
 var aliveMinutes = Math.floor(aliveSeconds/60);
 var aliveHours = Math.floor(aliveMinutes/60);
 var aliveDays = Math.floor(aliveHours/24);
+console.log(aliveDays);
+console.log(aliveHours);
+console.log(aliveMinutes);
 console.log(aliveSeconds);
 
-//Gather input from user and save as guess
-guess = prompt("I was born May 28, 1985 at 5:22 am. How many seconds do you think I have been alive?");
 
-//compare guess to answer and assign message for seconds
-if (guess == aliveSeconds) {
-  message = "That is correct! Are you sure you didn't cheat?";
-  correct += 1;
-} else if (guess < aliveSeconds) {
-  message = "Good guess but it is much longer than that.";
-} else {
-  message = "Good guess but not quite that long yet!";
+/*****Main function to guess the duration. timeString fills in duration units ie. hours days etc. Runs through loop prompting and incrementing the timesGuessed until the correct answer is given or the user inputs "quit".*****/
+guess = function(timeString, duration){
+  userGuess = prompt("I was born May 28, 1985 at 5:22 am. How many " + timeString +" do you think I have been alive? Type quit to quit the game.");
+  if (userGuess == duration){
+  message = "Congrats that is correct";
+  } else {
+    while ( userGuess != "quit" &&  userGuess != duration ){
+        if (userGuess < duration) {
+        message = "Try again, but think bigger";
+        } else {
+          message = "Try again, but not so high";
+        }
+      alert(message);
+      timesGuessed += 1
+      userGuess = prompt("I was born May 28, 1985 at 5:22 am. How many " + timeString +" do you think I have been alive? Type quit to quit the game.");
+    }
+    if (userGuess == "quit"){
+      message = "Quitting already?"
+      timesGuessed -= 1;
+    } else {
+      message = "Congrats that is correct!";
+    }
+  }
+  //increment the times guessed and print message to screen.
+  timesGuessed += 1;
+  alert(message);
 }
 
-alert(message);
+//call the guessing function to ask user to guess, seconds, minutes, hours, and days alive.
+guess("days", aliveDays);
+guess("hours", aliveHours);
+guess("minutes", aliveMinutes);
+guess("seconds", aliveSeconds);
 
-//Minutes alive loop
-guess = prompt("How many minutes do you think I have been alive?");
-
-if (guess == aliveMinutes) {
-  message = "That is correct! Are you sure you didn't cheat?";
-  correct += 1;
-} else if (guess < aliveMinutes) {
-  message = "Good guess but it is much longer than that.";
-} else {
-  message = "Good guess but not quite that long yet!";
-}
-
-alert(message);
-
-//Hours alive loop
-guess = prompt("How many hours do you think I have been alive?");
-
-if (guess == aliveHours) {
-  message = "That is correct! Are you sure you didn't cheat?";
-  correct += 1;
-} else if (guess < aliveHours) {
-  message = "Good guess but it is much longer than that.";
-} else {
-  message = "Good guess but not quite that long yet!";
-}
-
-alert(message);
-
-//Days alive loop
-guess = prompt("How many days do you think I have been alive?");
-
-if (guess == aliveDays) {
-  message = "That is correct! Are you sure you didn't cheat?";
-  correct += 1;
-} else if (guess < aliveDays) {
-  message = "Good guess but it is much longer than that.";
-} else {
-  message = "Good guess but not quite that long yet!";
-}
-
-alert(message);
-
-alert("Congrats you got "+ correct + " answers correct")
+//let the user know how many tries it took them to find the answer.
+alert("It took you " + timesGuessed + " guesses to find the answer.")
 
 </script>
