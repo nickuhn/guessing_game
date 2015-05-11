@@ -2,7 +2,7 @@
 <script type="text/javascript">
 
 var guess, message;
-
+var correct = 0;
 //Set birthday and convert to milliseconds
 var birthdate = new Date(1985, 05, 28, 5, 22);
 var birthMs = birthdate.getTime();
@@ -24,13 +24,45 @@ console.log(aliveSeconds);
 //Gather input from user and save as guess
 guess = prompt("I was born May 28, 1985 at 5:22 am. How many seconds do you think I have been alive?");
 
-//compare guess to answer and assign message
+//compare guess to answer and assign message for seconds
 if (guess == aliveSeconds) {
   message = "That is correct! Are you sure you didn't cheat?";
+  correct += 1;
+} else if (guess < aliveSeconds) {
+  message = "Good guess but it is much longer than that.";
 } else {
-  message = "Sorry, try again."
+  message = "Good guess but not quite that long yet!";
 }
 
 alert(message);
+
+//Minutes alive loop
+guess = prompt("How many minutes do you think I have been alive?");
+
+if (guess == aliveMinutes) {
+  message = "That is correct! Are you sure you didn't cheat?";
+  correct += 1;
+} else if (guess < aliveMinutes) {
+  message = "Good guess but it is much longer than that.";
+} else {
+  message = "Good guess but not quite that long yet!";
+}
+
+alert(message);
+
+//Hours alive loop
+guess = prompt("How many hours do you think I have been alive?");
+
+if (guess == aliveHours) {
+  message = "That is correct! Are you sure you didn't cheat?";
+  correct += 1;
+} else if (guess < aliveHours) {
+  message = "Good guess but it is much longer than that.";
+} else {
+  message = "Good guess but not quite that long yet!";
+}
+
+alert(message);
+alert("Congrats you got "+ correct + " answers correct")
 
 </script>
