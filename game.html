@@ -3,6 +3,10 @@
 
 var guess, message, userGuess;
 var timesGuessed = 0;
+var quit = 0;
+var timeIncrements = ["days","hours","minutes","seconds"];
+var durationsAlive = [aliveDays , aliveHours , aliveMinutes , aliveSeconds];
+var counter = 0;
 //Set birthday and convert to milliseconds
 var birthdate = new Date(1985, 05, 28, 5, 22);
 var birthMs = birthdate.getTime();
@@ -24,6 +28,11 @@ console.log(aliveHours);
 console.log(aliveMinutes);
 console.log(aliveSeconds);
 
+<<<<<<< HEAD
+=======
+
+  var quitting = 0;
+>>>>>>> 909be4be8d4eb21cea3020d2be2678b49eac638c
 /*****Main function to guess the duration. timeString fills in duration units ie. hours days etc. Runs through loop prompting and incrementing the timesGuessed until the correct answer is given or the user inputs "quit".*****/
 guess = function(timeString, duration){
   userGuess = prompt("I was born May 28, 1985 at 5:22 am. How many " + timeString +" do you think I have been alive? Type quit to quit the game.");
@@ -43,8 +52,10 @@ guess = function(timeString, duration){
     if (userGuess == "quit"){
       message = "Quitting already?"
       timesGuessed -= 1;
+      quitting = 1;
     } else {
       message = "Congrats that is correct!";
+      quitting=0;
     }
   }
   //increment the times guessed and print message to screen.
@@ -53,10 +64,12 @@ guess = function(timeString, duration){
 }
 
 //call the guessing function to ask user to guess, seconds, minutes, hours, and days alive.
-guess("days", aliveDays);
-guess("hours", aliveHours);
-guess("minutes", aliveMinutes);
-guess("seconds", aliveSeconds);
+console.log(quitting);
+while(quitting != 1 && counter<4){
+guess(timeIncrements[counter] , durationsAlive[counter]);
+counter ++;
+console.log(quitting);
+}
 
 //let the user know how many tries it took them to find the answer.
 alert("It took you " + timesGuessed + " guesses to find the answer.")
