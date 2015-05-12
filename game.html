@@ -24,14 +24,13 @@ console.log(aliveHours);
 console.log(aliveMinutes);
 console.log(aliveSeconds);
 
-
 /*****Main function to guess the duration. timeString fills in duration units ie. hours days etc. Runs through loop prompting and incrementing the timesGuessed until the correct answer is given or the user inputs "quit".*****/
 guess = function(timeString, duration){
   userGuess = prompt("I was born May 28, 1985 at 5:22 am. How many " + timeString +" do you think I have been alive? Type quit to quit the game.");
   if (userGuess == duration){
   message = "Congrats that is correct";
   } else {
-    while ( userGuess != "quit" &&  userGuess != duration ){
+    while (userGuess != "quit" &&  userGuess != duration){
         if (userGuess < duration) {
         message = "Try again, but think bigger";
         } else {
