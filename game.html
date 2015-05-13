@@ -48,7 +48,7 @@ guess = function(timeString, duration) {
         if (userGuess < duration) {
         message = "Try again, but think bigger";
         } else {
-          message = "Try again, but not so high";
+        message = "Try again, but not so high";
         }
       alert(message);
       timesGuessed += 1
@@ -57,11 +57,11 @@ guess = function(timeString, duration) {
                           quit to quit the game.");
     }
     if (userGuess == "quit") {
-      message = "Quitting already?"
+      message  = "Quitting already?"
       timesGuessed -= 1;
       quitting = 1;
     } else {
-      message = "Congrats that is correct!";
+      message  = "Congrats that is correct!";
       quitting = 0;
     }
   }
