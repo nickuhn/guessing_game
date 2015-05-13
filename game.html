@@ -1,7 +1,8 @@
 
 <script type="text/javascript">
 
-var guess, message, userGuess, aliveDays, aliveHours, aliveMinutes, aliveSeconds, birthdate, birthMs, today, todayMs, aliveMs, birthInput;
+var guess, message, userGuess, aliveDays, aliveHours, aliveMinutes,
+    aliveSeconds, birthdate, birthMs, today, todayMs, aliveMs, birthInput;
 var timesGuessed   = 0;
 var quit           = 0;
 var timeIncrements = ["days","hours","minutes","seconds"];
@@ -9,9 +10,14 @@ var durationsAlive = [ ];
 var counter        = 0;
 var quitting       = 0;
 
+
+
 //Set birthday and convert to milliseconds using input from user
-birthInput = prompt("what is your birthday? If unsure about time just put in 12:00:", "mm/dd/year hh:mm").split(/\W/); //found split paramater on stackoverflow
-birthdate  = new Date(birthInput[2], birthInput[0]-1, birthInput[1], birthInput[3], birthInput[4]);
+birthInput = prompt("what is your birthday? If unsure about time just put in
+                    12:00:", "mm/dd/year hh:mm").split(/\W/);
+                    //found split paramater on stackoverflow
+birthdate  = new Date(birthInput[2], birthInput[0]-1, birthInput[1],
+                      birthInput[3], birthInput[4]);
 birthMs    = birthdate.getTime();
 
 //Set current date and convert to milliseconds
@@ -26,9 +32,15 @@ aliveHours     = Math.floor(aliveMinutes/60);
 aliveDays      = Math.floor(aliveHours/24);
 durationsAlive = [aliveDays , aliveHours , aliveMinutes , aliveSeconds];
 
-/*****Main function to guess the duration. timeString fills in duration units ie. hours days etc. Runs through loop prompting and incrementing the timesGuessed until the correct answer is given or the user inputs "quit".*****/
+
+
+/*****Main function to guess the duration. timeString fills in duration units;
+ hours days etc. Runs through loop prompting and incrementing the timesGuessed
+ until the correct answer is given or the user inputs "quit".*****/
 guess = function(timeString, duration) {
-  userGuess = prompt("You were born on " + birthdate + ". How many " + timeString + " do you think you have been alive? Type quit to quit the game.");
+  userGuess = prompt("You were born on " + birthdate + ". How many " +
+                      timeString + " do you think you have been alive?
+                      Type quit to quit the game.");
   if (userGuess == duration) {
   message = "Congrats that is correct";
   } else {
@@ -40,7 +52,9 @@ guess = function(timeString, duration) {
         }
       alert(message);
       timesGuessed += 1
-      userGuess = prompt("You were born on " + birthdate + ". How many " + timeString + " do you think you have been alive? Type quit to quit the game.");
+      userGuess = prompt("You were born on " + birthdate + ". How many " +
+                          timeString + " do you think you have been alive? Type
+                          quit to quit the game.");
     }
     if (userGuess == "quit") {
       message = "Quitting already?"
@@ -56,7 +70,10 @@ guess = function(timeString, duration) {
   alert(message);
 }
 
-//call the guessing function to ask user to guess, seconds, minutes, hours, and days alive.
+
+
+/*call the guessing function to ask user to guess, seconds, minutes, hours,
+and days alive.*/
 while(quitting != 1 && counter < 4) {
 guess(timeIncrements[counter] , durationsAlive[counter]);
 counter ++;
