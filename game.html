@@ -1,85 +1,81 @@
 
 <script type="text/javascript">
 
-var guess, message, userGuess, aliveDays, aliveHours, aliveMinutes,
-    aliveSeconds, birthdate, birthMs, today, todayMs, aliveMs, birthInput;
-var timesGuessed   = 0;
-var quit           = 0;
-var timeIncrements = ["days","hours","minutes","seconds"];
-var durationsAlive = [ ];
-var counter        = 0;
-var quitting       = 0;
+  var guess, message, userGuess, today, todayMs, timeIncrements, durationsAlive;
+  var timesGuessed   = 0;
+  var quit           = 0;
+  var quitting       = 0;
+  today   = new Date();
+  todayMs = today.getTime();
 
+  //Created new person object that stores the user's birthdate.
+  var person = new Object();
+  //Set birthday and convert to milliseconds using input from user
+  person.birthInput = prompt("what is your birthday? If unsure about time just put in 12:00:", "mm/dd/year hh:mm").split(/\W/); //found split paramater on stackoverflow
+  person.birthdate = new Date(person.birthInput[2], person.birthInput[0]-1, person.birthInput[1], person.birthInput[3], person.birthInput[4]);
+  person.birthMs = person.birthdate.getTime();
+  //Find difference between dates and convert to seconds, minutes, hours and days
+  person.aliveMs = todayMs - person.birthMs;
+  person.aliveSeconds = Math.floor(person.aliveMs/1000);
+  person.aliveMinutes = Math.floor(person.aliveSeconds/60);
+  person.aliveHours = Math.floor(person.aliveMinutes/60);
+  person.aliveDays = Math.floor(person.aliveHours/24);
 
+  function Game(timeInc, durations) {
+    this.timeIncrements = timeInc;
+    this.durationsAlive = durations;
+    this.counterMax = this.durationsAlive.length;
+    this.counter = 0;
 
-//Set birthday and convert to milliseconds using input from user
-birthInput = prompt("what is your birthday? If unsure about time just put in
-                    12:00:", "mm/dd/year hh:mm").split(/\W/);
-                    //found split paramater on stackoverflow
-birthdate  = new Date(birthInput[2], birthInput[0]-1, birthInput[1],
-                      birthInput[3], birthInput[4]);
-birthMs    = birthdate.getTime();
-
-//Set current date and convert to milliseconds
-today   = new Date();
-todayMs = today.getTime();
-
-//Find difference between dates and convert to seconds, minutes, hours and days
-aliveMs        = todayMs - birthMs;
-aliveSeconds   = Math.floor(aliveMs/1000);
-aliveMinutes   = Math.floor(aliveSeconds/60);
-aliveHours     = Math.floor(aliveMinutes/60);
-aliveDays      = Math.floor(aliveHours/24);
-durationsAlive = [aliveDays , aliveHours , aliveMinutes , aliveSeconds];
-
-
-
-/*****Main function to guess the duration. timeString fills in duration units;
- hours days etc. Runs through loop prompting and incrementing the timesGuessed
- until the correct answer is given or the user inputs "quit".*****/
-guess = function(timeString, duration) {
-  userGuess = prompt("You were born on " + birthdate + ". How many " +
-                      timeString + " do you think you have been alive?
-                      Type quit to quit the game.");
-  if (userGuess == duration) {
-  message = "Congrats that is correct";
-  } else {
-    while (userGuess != "quit" &&  userGuess != duration){
-        if (userGuess < duration) {
-        message = "Try again, but think bigger";
-        } else {
-        message = "Try again, but not so high";
-        }
-      alert(message);
-      timesGuessed += 1
-      userGuess = prompt("You were born on " + birthdate + ". How many " +
-                          timeString + " do you think you have been alive? Type
-                          quit to quit the game.");
-    }
-    if (userGuess == "quit") {
-      message  = "Quitting already?"
-      timesGuessed -= 1;
-      quitting = 1;
-    } else {
-      message  = "Congrats that is correct!";
-      quitting = 0;
+    /*call the guessing function to ask user to guess, seconds, minutes, hours,
+    and days alive.*/
+    this.play = function() {
+      while (quitting != 1 && this.counter < this.counterMax) {
+        guess(this.timeIncrements[this.counter] , this.durationsAlive[this.counter]);
+        this.counter ++;
+      };
     }
   }
-  //increment the times guessed and print message to screen.
-  timesGuessed ++;
-  alert(message);
-}
 
+  /*****Main function to guess the duration. timeString fills in duration units;
+   hours days etc. Runs through loop prompting and incrementing the timesGuessed
+   until the correct answer is given or the user inputs "quit".*****/
+  guess = function(timeString, duration) {
+    userGuess = prompt("You were born on " + person.birthdate + ". How many " + timeString + " do you think you have been alive? Type quit to quit the game.");
+    if (userGuess == duration) {
+    message = "Congrats that is correct";
+    } else {
+      while (userGuess != "quit" &&  userGuess != duration){
+          if (userGuess < duration) {
+          message = "Try again, but think bigger";
+          } else {
+            message = "Try again, but not so high";
+          }
+        alert(message);
+        timesGuessed += 1
+        userGuess = prompt("You were born on " + person.birthdate + ". How many " + timeString + " do you think you have been alive? Type quit to quit the game.");
+      }
+      if (userGuess == "quit") {
+        message = "Quitting already?"
+        timesGuessed -= 1;
+        quitting = 1;
+      } else {
+        message = "Congrats that is correct!";
+        quitting = 0;
+      }
+    }
+    //increment the times guessed and print message to screen.
+    timesGuessed ++;
+    alert(message);
+  }
 
+  timeIncrements = ["days","hours","minutes","seconds"];
+  durationsAlive = [person.aliveDays , person.aliveHours , person.aliveMinutes , person.aliveSeconds];
 
-/*call the guessing function to ask user to guess, seconds, minutes, hours,
-and days alive.*/
-while(quitting != 1 && counter < 4) {
-guess(timeIncrements[counter] , durationsAlive[counter]);
-counter ++;
-}
-
-//let the user know how many tries it took them to find the answer.
-alert("It took you " + timesGuessed + " guesses to find the answers.")
+  var game = new Game(timeIncrements, durationsAlive);
+  console.log(game);
+  game.play();
+  //let the user know how many tries it took them to find the answer.
+  alert("It took you " + timesGuessed + " guesses to find the answers.");
 
 </script>
