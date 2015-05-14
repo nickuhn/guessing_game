@@ -1,10 +1,10 @@
 <script type="text/javascript">
-
+(function(){
 
   //Variable Declarations
 
 
-  var guess, message, userGuess, today, todayMs, timeIncrements, durationsAlive, person, playerInput, game, correctBreak;
+  var guess, message, userGuess, today, todayMs, timeIncrements, durationsAlive, person, userInputBirth, game, correctBreak;
   var timesGuessed   = 0;
   var quit           = 0;
   var quitting       = 0;
@@ -25,6 +25,7 @@
     this.aliveHours   = Math.floor(this.aliveMinutes/60),
     this.aliveDays    = Math.floor(this.aliveHours/24)
   }
+
   function Game(timeInc, durations) {
     this.timeIncrements = timeInc;
     this.durationsAlive = durations;
@@ -34,16 +35,19 @@
     and days alive.*/
     this.play = function() {
       while (quitting != 1 && this.counter < this.counterMax) {
-        guess(this.timeIncrements[this.counter] , this.durationsAlive[this.counter]);
+        quizLoop(this.timeIncrements[this.counter] , this.durationsAlive[this.counter]);
         this.counter ++;
       }
     }
   }
+
+
+
   /*****Main function to guess the duration. timeString fills in duration units;
    hours days etc. Runs through loop prompting and incrementing the timesGuessed
    until the correct answer is given or the user inputs "quit".*****/
-  guess = function(timeString, duration) {
-    userGuess = prompt("You were born on " + person.birthdate + ". How many " + timeString + " do you think you have been alive? Guess within 10% to be correct! Type quit to quit the game.");
+  quizLoop = function(timeString, duration) {
+    userGuess = prompt(user.name + " you were born on " + user.birthdate + ". How many " + timeString + " do you think you have been alive? Guess within 10% to be correct! Type quit to quit the game.");
     if (duration * 0.9 < userGuess && userGuess < duration * 1.1) {
     message = "Congrats that is correct";
     } else {
@@ -59,7 +63,7 @@
           }
           alert(message);
           timesGuessed += 1
-          userGuess = prompt("You were born on " + person.birthdate + ". How many " + timeString + " do you think you have been alive? Guess within 10% to be correct! Type quit to quit the game.");
+          userGuess = prompt(user.name + " you were born on " + user.birthdate + ". How many " + timeString + " do you think you have been alive? Guess within 10% to be correct! Type quit to quit the game.");
         }
       }
       if (userGuess == "quit") {
@@ -77,13 +81,15 @@
   }
   //Gather player input, set factors for game, call game method and display results.
 
-  //Initialize Player
-  playerInput     = prompt("what is your birthday? If unsure about time just put in 12:00:", "mm/dd/year hh:mm").split(/\W/);
-  person          = new Player(playerInput);
 
+
+  //Initialize Player
+  userInputBirth  = prompt("what is your birthday? If unsure about time just put in 12:00:", "mm/dd/year hh:mm").split(/\W/);
+  user            = new Player(userInputBirth);
+  user.name       = prompt("What is your name?")
   //Initialize Time/Duration arrays
   timeIncrements  = ["days","hours","minutes","seconds"];
-  durationsAlive  = [person.aliveDays , person.aliveHours , person.aliveMinutes , person.aliveSeconds];
+  durationsAlive  = [user.aliveDays , user.aliveHours , user.aliveMinutes , user.aliveSeconds];
 
   //create new game and play
   game            = new Game(timeIncrements, durationsAlive);
@@ -91,5 +97,5 @@
 
   //let the user know how many tries it took them to find the answer.
   alert("It took you " + timesGuessed + " guesses to find the answers.");
-
+})();
 </script>
