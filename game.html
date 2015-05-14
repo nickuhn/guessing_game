@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
 
 
@@ -15,9 +14,7 @@
 
   //Object Declarations:
 
-
-  //Created new person object that stores the user's birthdate.
-  function Player(birthInput) {
+ function Player(birthInput) {
     //Set birthday and convert to milliseconds using input from user found split paramater on stackoverflow
     this.birthdate    = new Date(birthInput[2], birthInput[0]-1, birthInput[1], birthInput[3], birthInput[4]),
     this.birthMs      = this.birthdate.getTime(),
@@ -28,13 +25,11 @@
     this.aliveHours   = Math.floor(this.aliveMinutes/60),
     this.aliveDays    = Math.floor(this.aliveHours/24)
   }
-
   function Game(timeInc, durations) {
     this.timeIncrements = timeInc;
     this.durationsAlive = durations;
     this.counterMax     = this.durationsAlive.length;
     this.counter        = 0;
-
     /*call the guessing function to ask user to guess, seconds, minutes, hours,
     and days alive.*/
     this.play = function() {
@@ -44,9 +39,6 @@
       }
     }
   }
-
-
-
   /*****Main function to guess the duration. timeString fills in duration units;
    hours days etc. Runs through loop prompting and incrementing the timesGuessed
    until the correct answer is given or the user inputs "quit".*****/
@@ -83,15 +75,17 @@
     timesGuessed ++;
     alert(message);
   }
-
-
-
   //Gather player input, set factors for game, call game method and display results.
 
+  //Initialize Player
   playerInput     = prompt("what is your birthday? If unsure about time just put in 12:00:", "mm/dd/year hh:mm").split(/\W/);
   person          = new Player(playerInput);
+
+  //Initialize Time/Duration arrays
   timeIncrements  = ["days","hours","minutes","seconds"];
   durationsAlive  = [person.aliveDays , person.aliveHours , person.aliveMinutes , person.aliveSeconds];
+
+  //create new game and play
   game            = new Game(timeIncrements, durationsAlive);
   game.play();
 
