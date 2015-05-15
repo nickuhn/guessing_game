@@ -15,36 +15,55 @@
     <main>
       <article>
         <h2>Time flies, just how much have you used so far?</h2>
-        <figure>
+        <!-- <figure>
           <a href="http://pixabay.com/static/uploads/photo/2013/07/12/17/22/hourglass-152090_640.png"><img src="http://pixabay.com/static/uploads/photo/2013/07/12/17/22/hourglass-152090_640.png" alt="default image before playing"></a>
           <a href="http://pixabay.com/static/uploads/photo/2013/07/12/17/00/remove-151678_640.png"><img src="http://pixabay.com/static/uploads/photo/2013/07/12/17/00/remove-151678_640.png" alt="image for incorrect"></a>
           <a href="http://pixabay.com/static/uploads/photo/2013/07/12/17/00/approved-151676_640.png"><img src="http://pixabay.com/static/uploads/photo/2013/07/12/17/00/approved-151676_640.png" alt="image for correct"></a>
           <a href="http://pixabay.com/static/uploads/photo/2012/04/05/00/42/cake-25388_640.png"><img src="http://pixabay.com/static/uploads/photo/2012/04/05/00/42/cake-25388_640.png" alt="you won!"></a>
           <figcaption>image that changes depending on game state</figcaption>
-        </figure>
-        <p>input messages go here</p>
-        <input type="number">
-        <button type="submit" name="Submit">Guess</button>
-        <button type="submit" name="Quit">Quit</button>
+        </figure> -->
+        <label for='name-input'>Name: </label>
+        <input id='name-input' placeholder="Marvin" type="text">
+        <label for='birth-input'>Birthday: </label>
+        <input id='birth-input' placeholder="MM/DD/YEAR HH:MM" type="text">
+        <button type="button" id="start-button">Submit Player Info</button>
+        <p id='days-result'></p>
+        <label for='guess-days-input'>Guess your Days Alive: </label>
+        <input id='guess-days' placeholder="365 per year" type="number">
+        <button type="submit" id="submit-days-button">Submit</button>
+        <p id='hours-result'></p>
+        <label for='guess-hours-input'>Guess your Hours Alive: </label>
+        <input id='guess-hours' placeholder="24 per Day" type="number">
+        <button type="submit" id="submit-hours-button">Submit</button>
+        <p id='minutes-result'></p>
+        <label for='guess-minutes-input'>Guess your Minutes Alive: </label>
+        <input id='guess-minutes' placeholder="60 per Hour" type="number">
+        <button type="submit" id="submit-minutes-button">Submit</button>
+        <p id='seconds-result'></p>
+        <label for='guess-seconds-input'>Guess your Seconds Alive: </label>
+        <input id='guess-seconds' placeholder='60 per Minute' type="number">
+        <button type="submit" id="submit-seconds-button">Submit</button>
+        <p id='game-messages'></p>
+        <p id='game-result'></p>
       </article>
 
       <article>
         <h2>Instructions:</h2>
         <ol>
+          <li>Put in your name so we know who you are!</li>
           <li>Put in your birthday and time, be as precise as possible!</li>
-          <li>Input your guess and click submit.</li>
+          <li>Click on the "Submit Player Info" button</li>
+          <li>Input your guess and click submit on each line.</li>
           <li>If your answer is within 10% of the correct value you win!</li>
-          <li>Keep guessing till you get all the answers correct.</li>
+          <li>Keep guessing till you get all the answers correct and win a special prize.</li>
         </ol>
-        <p>You can quit at anytime by typing "quit"</p>
       </article>
 
       <aside>
         <h2>Player Information</h2>
-        <h3>Player Name</h3>
-        <time datetime="birthdate">May 28, 1985</time>
-        <time datetime="current date">May 14, 2015</time>
-        <p>Guesses Used</p>
+        <h3>Player Name: <span id="player-name"></span></h3>
+        <time id="birthdate">Player Birthday</time>
+        <time id="current-date">Today</time>
       </aside>
     </main>
 
@@ -54,4 +73,3 @@
     <script src="game.js"></script>
   </body>
 </html>
-
