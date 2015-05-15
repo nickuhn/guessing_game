@@ -1,9 +1,10 @@
 
 (function(){
   //Variable Declarations
-  var user, daysGuess, hoursGuess, minutesGuess, secondsGuess, message;
+  var user, daysGuess, hoursGuess, minutesGuess, secondsGuess, message, correct;
   var today          = new Date();
   var todayMs        = today.getTime();
+  var winMessage     = "Keep Going!"
 
   //Player object constructor:
  function Player() {
@@ -16,10 +17,19 @@
       this.aliveMinutes = Math.floor(this.aliveSeconds/60);
       this.aliveHours   = Math.floor(this.aliveMinutes/60);
       this.aliveDays    = Math.floor(this.aliveHours/24);
+      this.correct      = 0
     }
     this.show = function(){
       document.getElementById('player-name').textContent = document.getElementById('name-input').value;
       document.getElementById('birthdate').textContent = this.birthdate.toDateString();
+    }
+    this.cake = function(){
+      if(this.correct >= 4) {
+        winMessage = "You did it! Congratulations!";
+      } else {
+        winMessage = "Keep going!";
+      }
+      document.getElementById('game-result').textContent = winMessage;
     }
   }
 
@@ -32,6 +42,7 @@
     } else {
       message = "Think smaller!"
     }
+    user.correct ++;
     return message;
   }
 
@@ -46,21 +57,25 @@
   document.getElementById('submit-days-button').onclick = function() {
   daysGuess = document.getElementById('guess-days').value;
   document.getElementById('days-result').textContent = guessEval(daysGuess, user.aliveDays);
+  user.cake();
   }
 
   document.getElementById('submit-hours-button').onclick = function() {
   hoursGuess = document.getElementById('guess-hours').value;
   document.getElementById('hours-result').textContent = guessEval(hoursGuess, user.aliveHours);
+  user.cake();
   }
 
   document.getElementById('submit-minutes-button').onclick = function() {
   minutesGuess = document.getElementById('guess-minutes').value;
   document.getElementById('minutes-result').textContent = guessEval(minutesGuess, user.aliveMinutes);
+  user.cake();
   }
 
   document.getElementById('submit-seconds-button').onclick = function() {
   secondsGuess = document.getElementById('guess-seconds').value;
   document.getElementById('seconds-result').textContent = guessEval(secondsGuess, user.aliveSeconds);
+  user.cake();
   }
   //Keeps date on site current
   document.getElementById('current-date').textContent = today.toDateString();

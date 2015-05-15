@@ -22,28 +22,31 @@
           <a href="http://pixabay.com/static/uploads/photo/2012/04/05/00/42/cake-25388_640.png"><img src="http://pixabay.com/static/uploads/photo/2012/04/05/00/42/cake-25388_640.png" alt="you won!"></a>
           <figcaption>image that changes depending on game state</figcaption>
         </figure> -->
+        <form>
         <label for='name-input'>Name: </label>
-        <input id='name-input' placeholder="Marvin" type="text">
+        <input id='name-input' placeholder="Marvin" type="text" autofocus>
         <label for='birth-input'>Birthday: </label>
         <input id='birth-input' placeholder="MM/DD/YEAR HH:MM" type="text">
         <button type="button" id="start-button">Submit Player Info</button>
+        </form>
+        <form>
         <p id='days-result'></p>
         <label for='guess-days-input'>Guess your Days Alive: </label>
         <input id='guess-days' placeholder="365 per year" type="number">
-        <button type="submit" id="submit-days-button">Submit</button>
+        <button type="button" id="submit-days-button">Submit</button>
         <p id='hours-result'></p>
         <label for='guess-hours-input'>Guess your Hours Alive: </label>
         <input id='guess-hours' placeholder="24 per Day" type="number">
-        <button type="submit" id="submit-hours-button">Submit</button>
+        <button type="button" id="submit-hours-button">Submit</button>
         <p id='minutes-result'></p>
         <label for='guess-minutes-input'>Guess your Minutes Alive: </label>
         <input id='guess-minutes' placeholder="60 per Hour" type="number">
-        <button type="submit" id="submit-minutes-button">Submit</button>
+        <button type="button" id="submit-minutes-button">Submit</button>
         <p id='seconds-result'></p>
         <label for='guess-seconds-input'>Guess your Seconds Alive: </label>
         <input id='guess-seconds' placeholder='60 per Minute' type="number">
-        <button type="submit" id="submit-seconds-button">Submit</button>
-        <p id='game-messages'></p>
+        <button type="button" id="submit-seconds-button">Submit</button>
+        </form>
         <p id='game-result'></p>
       </article>
 
