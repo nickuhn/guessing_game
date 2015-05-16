@@ -1,4 +1,3 @@
-
 (function(){
   //Variable Declarations
   var user, daysGuess, hoursGuess, minutesGuess, secondsGuess, message, correct;
@@ -17,14 +16,25 @@
       this.aliveMinutes = Math.floor(this.aliveSeconds/60);
       this.aliveHours   = Math.floor(this.aliveMinutes/60);
       this.aliveDays    = Math.floor(this.aliveHours/24);
-      this.correct      = 0
     }
+    //Place player name and birthday on page
     this.show = function(){
       document.getElementById('player-name').textContent = document.getElementById('name-input').value;
       document.getElementById('birthdate').textContent = this.birthdate.toDateString();
     }
+    //Determines if player has gotten all four questions correct
+    //and updates a win message.
     this.cake = function(){
-      if(this.correct >= 4) {
+      var correctCounter = 0;
+      var checkMessage = '';
+      var correctPrints = document.getElementsByName('results');
+      for(var i = 0; i < correctPrints.length; i++) {
+        checkMessage = correctPrints[i].textContent;
+        if(checkMessage === "That is correct!") {
+          correctCounter ++
+        }
+      }
+      if(correctCounter >= 4) {
         winMessage = "You did it! Congratulations!";
       } else {
         winMessage = "Keep going!";
@@ -33,7 +43,8 @@
     }
   }
 
-  //Function to determine if the users guess is correct, if not returns higher or lower guidance
+  //Function to determine if the users guess is correct,
+  //if not returns higher or lower guidance
   var guessEval = function(userGuess, duration) {
     if (duration * 0.9 < userGuess && userGuess < duration * 1.1) {
       message = "That is correct!"
@@ -77,6 +88,7 @@
   document.getElementById('seconds-result').textContent = guessEval(secondsGuess, user.aliveSeconds);
   user.cake();
   }
+
   //Keeps date on site current
   document.getElementById('current-date').textContent = today.toDateString();
 })();
