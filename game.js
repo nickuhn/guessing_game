@@ -53,7 +53,6 @@
     } else {
       message = "Think smaller!"
     }
-    user.correct ++;
     return message;
   }
 
